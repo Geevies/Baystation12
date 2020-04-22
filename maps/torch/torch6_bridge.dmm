@@ -5976,6 +5976,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge/disciplinary_board_room)
 "lT" = (
+/obj/item/taperoll/bog,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/heads/cobed)
 "lW" = (
@@ -6403,7 +6404,7 @@
 	dir = 1
 	},
 /obj/machinery/camera/network/command{
-	c_tag = "Head of Security - Office";
+	c_tag = "Chief of Security - Office";
 	network = list("Command","Security")
 	},
 /obj/machinery/button/alternate/door{
@@ -13165,7 +13166,7 @@
 /obj/structure/noticeboard{
 	pixel_x = 32
 	},
-/obj/machinery/computer/robotics,
+/obj/machinery/computer/modular/preset/aislot/sysadmin,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/storage)
 "Hc" = (

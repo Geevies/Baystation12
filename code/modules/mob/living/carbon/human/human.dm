@@ -280,7 +280,7 @@
 	else
 		return if_no_id
 
-//repurposed proc. Now it combines get_id_name() and get_face_name() to determine a mob's name variable. Made into a seperate proc as it'll be useful elsewhere
+//repurposed proc. Now it combines get_id_name() and get_face_name() to determine a mob's name variable. Made into a separate proc as it'll be useful elsewhere
 /mob/living/carbon/human/proc/get_visible_name()
 	var/face_name = get_face_name()
 	var/id_name = get_id_name("")
@@ -1317,17 +1317,15 @@
 		W.message = message
 		W.add_fingerprint(src)
 
-#define CAN_INJECT 1
-#define INJECTION_PORT 2
 /mob/living/carbon/human/can_inject(var/mob/user, var/target_zone)
 	var/obj/item/organ/external/affecting = get_organ(target_zone)
 
 	if(!affecting)
-		to_chat(user, "<span class='warning'>They are missing that limb.</span>")
+		to_chat(user, SPAN_WARNING("\The [src] is missing that limb."))
 		return 0
 
 	if(BP_IS_ROBOTIC(affecting))
-		to_chat(user, "<span class='warning'>That limb is robotic.</span>")
+		to_chat(user, SPAN_WARNING("You cannot inject a robotic limb."))
 		return 0
 
 	. = CAN_INJECT

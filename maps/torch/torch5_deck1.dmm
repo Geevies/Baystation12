@@ -7617,6 +7617,7 @@
 	dir = 4;
 	level = 2
 	},
+/obj/item/taperoll/bog,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/aux)
 "aAr" = (
@@ -8482,9 +8483,11 @@
 	icon_state = "alarm0";
 	pixel_x = 24
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/security/wing)
 "aDE" = (
@@ -8694,7 +8697,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
-/turf/simulated/floor/tiled/monotile,
+/obj/effect/catwalk_plated,
+/turf/simulated/floor/plating,
 /area/security/wing)
 "aEI" = (
 /obj/effect/wallframe_spawn/reinforced/polarized{
@@ -9033,19 +9037,6 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/firstdeck/aftport)
-"aFP" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/machinery/door/firedoor,
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/structure/disposalpipe/segment,
-/turf/simulated/floor/tiled/monotile,
-/area/security/wing)
 "aFQ" = (
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "bo_windows"
@@ -9265,11 +9256,11 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+/obj/structure/disposalpipe/segment,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 4
 	},
-/obj/structure/disposalpipe/segment,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/plating,
 /area/security/wing)
 "aGM" = (
@@ -10088,6 +10079,7 @@
 /obj/machinery/door/airlock/multi_tile/glass/security{
 	name = "Brig Wing"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/security/wing)
 "aKB" = (
@@ -10099,6 +10091,7 @@
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/security/wing)
 "aKE" = (
@@ -15561,8 +15554,8 @@
 	pixel_z = 0
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	icon_state = "intact";
-	dir = 5
+	dir = 5;
+	icon_state = "intact"
 	},
 /obj/structure/closet/crate/freezer,
 /obj/item/weapon/reagent_containers/ivbag/nanoblood,
@@ -17489,6 +17482,9 @@
 	network = list("Medical, Engineering")
 	},
 /obj/machinery/vitals_monitor,
+/obj/machinery/light{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/dark,
 /area/medical/surgery2)
 "eOb" = (
@@ -17541,7 +17537,6 @@
 	pixel_x = -2;
 	pixel_y = 24
 	},
-/obj/item/weapon/storage/firstaid/adv,
 /obj/item/weapon/reagent_containers/spray/sterilizine,
 /obj/item/weapon/reagent_containers/spray/cleaner/drone,
 /turf/simulated/floor/tiled/dark,
@@ -18204,6 +18199,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/table/standard,
+/obj/item/weapon/storage/firstaid/adv,
 /turf/simulated/floor/tiled/dark,
 /area/medical/surgery2)
 "fDJ" = (
@@ -22496,11 +22492,11 @@
 	pixel_x = -24;
 	pixel_y = 0
 	},
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 4
-	},
 /obj/machinery/camera/network/security{
 	c_tag = "Security Hallway - Center";
+	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -22517,6 +22513,7 @@
 	dir = 4;
 	level = 2
 	},
+/obj/item/taperoll/bog,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/aux)
 "kss" = (
@@ -27991,6 +27988,16 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
+"qYy" = (
+/obj/effect/floor_decal/corner/red{
+	icon_state = "corner_white";
+	dir = 9
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/security/wing)
 "qZb" = (
 /obj/machinery/atmospherics/pipe/manifold/visible{
 	dir = 8
@@ -30734,7 +30741,7 @@
 	icon_state = "bordercolorhalf";
 	dir = 8
 	},
-/turf/simulated/floor/tiled/monotile,
+/turf/simulated/floor/tiled,
 /area/security/wing)
 "uJn" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -30746,11 +30753,6 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/foreport)
-"uKb" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/machinery/door/firedoor,
-/turf/simulated/floor/tiled/monotile,
-/area/security/wing)
 "uLB" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	icon_state = "map-scrubbers";
@@ -41196,9 +41198,9 @@ htq
 nlb
 cix
 rOE
-rOE
+qYy
 uJd
-uKb
+uJd
 krc
 rOE
 aJn
@@ -41400,7 +41402,7 @@ nDB
 aCx
 aDD
 aEH
-aFP
+aEH
 aGL
 aHX
 jON
