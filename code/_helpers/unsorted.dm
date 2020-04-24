@@ -335,7 +335,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 	. = list()
 	for(var/mob/living/silicon/ai/A in GLOB.living_mob_list_)
-		if(A.stat == DEAD || A.control_disabled || !(get_z(A) in zs))
+		if(A.stat == DEAD || A.control_disabled || !(get_z(A) in zs) || !A.visible_on_law_console)
 			continue
 		. += A
 	return .

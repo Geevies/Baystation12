@@ -60,6 +60,10 @@ var/list/ai_verbs_default = list(
 	var/holo_icon_malf = FALSE // for new hologram system
 	var/obj/item/device/multitool/aiMulti = null
 
+	var/datum/ai_laws/law_override
+	var/can_unwrench = TRUE
+	var/visible_on_law_console = TRUE
+
 	silicon_camera = /obj/item/device/camera/siliconcam/ai_camera
 	silicon_radio = /obj/item/device/radio/headset/heads/ai_integrated
 	var/obj/item/device/radio/headset/heads/ai_integrated/ai_radio
@@ -136,7 +140,9 @@ var/list/ai_verbs_default = list(
 	holo_icon = getHologramIcon(icon('icons/mob/hologram.dmi',"Face"))
 	holo_icon_longrange = getHologramIcon(icon('icons/mob/hologram.dmi',"Face"), hologram_color = HOLOPAD_LONG_RANGE)
 
-	if(istype(L, /datum/ai_laws))
+	if(istype(law_override))
+		laws = law_override
+	else if(istype(L, /datum/ai_laws))
 		laws = L
 
 	aiMulti = new(src)
@@ -610,6 +616,9 @@ var/list/ai_verbs_default = list(
 		card.grab_ai(src, user)
 
 	else if(isWrench(W))
+		if(!can_unwrench)
+			to_chat(user, SPAN_WARNING("\The [src] cannot be unbolted from the floor!"))
+			return
 		if(anchored)
 			user.visible_message("<span class='notice'>\The [user] starts to unbolt \the [src] from the plating...</span>")
 			if(!do_after(user,40, src))
