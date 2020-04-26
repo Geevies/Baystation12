@@ -325,14 +325,18 @@
 
 	// AIs don't need a spawnpoint, they must spawn at an empty core
 	if(character.mind.assigned_role == "AI")
-
-		character = character.AIize(move=0) // AIize the character, but don't move them yet
-
 		// is_available for AI checks that there is an empty core available in this list
 		var/obj/structure/AIcore/deactivated/C = empty_playable_ai_cores[1]
 		empty_playable_ai_cores -= C
 
-		character.forceMove(C.loc)
+		// AIize the character, but don't move them yet
+		if(istype(C, /obj/structure/AIcore/deactivated/ascent))
+			world << "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASCENTTTTT AIIIIIIIIIIIIIIIIIIIIIII"
+			character = character.AIize(FALSE, /mob/living/silicon/ai/ascent, /datum/ai_laws/ascent, "Ascent AI")
+		else
+			character = character.AIize(FALSE)
+
+		character.forceMove(get_turf(C))
 		var/mob/living/silicon/ai/A = character
 		A.on_mob_init()
 

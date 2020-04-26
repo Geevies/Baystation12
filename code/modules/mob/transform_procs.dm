@@ -43,15 +43,15 @@
 	spawning = 1
 	return ..()
 
-/mob/living/carbon/human/AIize(move=1) // 'move' argument needs defining here too because BYOND is dumb
+/mob/living/carbon/human/AIize(var/move = TRUE, var/ai_type = /mob/living/silicon/ai, var/laws, var/spawn_landmark = "AI")
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
 	for(var/t in organs)
 		qdel(t)
 	QDEL_NULL_LIST(worn_underwear)
-	return ..(move)
+	return ..(move, ai_type, laws, spawn_landmark)
 
-/mob/living/carbon/AIize()
+/mob/living/carbon/AIize(var/move = TRUE, var/ai_type = /mob/living/silicon/ai, var/laws, var/spawn_landmark = "AI")
 	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
 	for(var/obj/item/W in src)
@@ -59,14 +59,17 @@
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null
 	set_invisibility(101)
-	return ..()
+	return ..(move, ai_type, laws, spawn_landmark)
 
-/mob/proc/AIize(move=1)
+/mob/proc/AIize(var/move = TRUE, var/ai_type = /mob/living/silicon/ai, var/laws, var/spawn_landmark = "AI")
 	if(client)
 		sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = GLOB.lobby_sound_channel))// stop the jams for AIs
-
-
-	var/mob/living/silicon/ai/O = new (loc, GLOB.using_map.default_law_type,,1)//No MMI but safety is in effect.
+	world << "Laws: [laws]"
+	if(!laws)
+		world << "No laws, resetting"
+		laws = GLOB.using_map.default_law_type
+	world << "AI Type: [ai_type]"
+	var/mob/living/silicon/ai/O = new ai_type(loc, laws, null, 1)//No MMI but safety is in effect.
 	O.set_invisibility(0)
 	O.aiRestorePowerRoutine = 0
 	if(mind)
@@ -78,7 +81,7 @@
 	if(move)
 		var/obj/loc_landmark
 		for(var/obj/effect/landmark/start/sloc in landmarks_list)
-			if (sloc.name != "AI")
+			if (sloc.name != spawn_landmark)
 				continue
 			if (locate(/mob/living) in sloc.loc)
 				continue
@@ -92,7 +95,7 @@
 		if (!loc_landmark)
 			to_chat(O, "Oh god sorry we can't find an unoccupied AI spawn location, so we're spawning you on top of someone.")
 			for(var/obj/effect/landmark/start/sloc in landmarks_list)
-				if (sloc.name == "AI")
+				if (sloc.name == spawn_landmark)
 					loc_landmark = sloc
 		O.forceMove(loc_landmark.loc)
 		O.on_mob_init()

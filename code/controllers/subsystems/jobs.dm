@@ -576,6 +576,9 @@ SUBSYSTEM_DEF(jobs)
 
 /datum/controller/subsystem/jobs/proc/spawn_empty_ai()
 	for(var/obj/effect/landmark/start/S in landmarks_list)
+		if(S.name == "Ascent AI")
+			empty_playable_ai_cores += new /obj/structure/AIcore/deactivated/ascent(get_turf(S))
+			continue
 		if(S.name != "AI")
 			continue
 		if(locate(/mob/living) in S.loc)

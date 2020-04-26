@@ -60,7 +60,6 @@ var/list/ai_verbs_default = list(
 	var/holo_icon_malf = FALSE // for new hologram system
 	var/obj/item/device/multitool/aiMulti = null
 
-	var/datum/ai_laws/law_override
 	var/can_unwrench = TRUE
 	var/visible_on_law_console = TRUE
 
@@ -140,9 +139,7 @@ var/list/ai_verbs_default = list(
 	holo_icon = getHologramIcon(icon('icons/mob/hologram.dmi',"Face"))
 	holo_icon_longrange = getHologramIcon(icon('icons/mob/hologram.dmi',"Face"), hologram_color = HOLOPAD_LONG_RANGE)
 
-	if(istype(law_override))
-		laws = law_override
-	else if(istype(L, /datum/ai_laws))
+	if(istype(L, /datum/ai_laws))
 		laws = L
 
 	aiMulti = new(src)
@@ -170,7 +167,9 @@ var/list/ai_verbs_default = list(
 
 	if(!safety)//Only used by AIize() to successfully spawn an AI.
 		if (!B)//If there is no player/brain inside.
-			empty_playable_ai_cores += new/obj/structure/AIcore/deactivated(loc)//New empty terminal.
+			var/obj/structure/AIcore/deactivated/C = new /obj/structure/AIcore/deactivated(get_turf(src))
+			C.laws = src.laws
+			empty_playable_ai_cores += C
 			qdel(src)//Delete AI.
 			return
 		else

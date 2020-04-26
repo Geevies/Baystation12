@@ -9,7 +9,7 @@ var/global/list/empty_playable_ai_cores = list()
 	var/state = 0
 	var/datum/ai_laws/laws = new /datum/ai_laws/nanotrasen
 	var/obj/item/weapon/stock_parts/circuitboard/circuit = null
-	var/obj/item/device/mmi/brain = null
+	var/obj/item/device/mmi/brain
 	var/authorized
 
 /obj/structure/AIcore/emag_act(var/remaining_charges, var/mob/user, var/emag_source)
@@ -287,3 +287,12 @@ var/global/list/empty_playable_ai_cores = list()
 	else
 		empty_playable_ai_cores += D
 		to_chat(src, "\The [id] is now <font color=\"#008000\">available</font> for latejoining AIs.")
+
+/obj/structure/AIcore/deactivated/ascent
+	name = "inactive ascent AI"
+
+/obj/structure/AIcore/deactivated/ascent/attackby(obj/item/weapon/W, mob/user)
+	if(isWrench(W))
+		to_chat(user, SPAN_WARNING("You cannot unbolt \the [src] from the floor!"))
+	else
+		..()
