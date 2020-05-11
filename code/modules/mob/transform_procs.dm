@@ -61,14 +61,11 @@
 	set_invisibility(101)
 	return ..(move, ai_type, laws, spawn_landmark)
 
-/mob/proc/AIize(var/move = TRUE, var/ai_type = /mob/living/silicon/ai, var/laws, var/spawn_landmark = "AI")
+/mob/proc/AIize(var/move = TRUE, var/ai_type = /mob/living/silicon/ai, var/datum/ai_laws/laws, var/spawn_landmark = "AI")
 	if(client)
 		sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = GLOB.lobby_sound_channel))// stop the jams for AIs
-	world << "Laws: [laws]"
-	if(!laws)
-		world << "No laws, resetting"
+	if(isnull(laws))
 		laws = GLOB.using_map.default_law_type
-	world << "AI Type: [ai_type]"
 	var/mob/living/silicon/ai/O = new ai_type(loc, laws, null, 1)//No MMI but safety is in effect.
 	O.set_invisibility(0)
 	O.aiRestorePowerRoutine = 0

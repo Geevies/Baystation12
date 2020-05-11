@@ -332,7 +332,8 @@
 		// AIize the character, but don't move them yet
 		if(istype(C, /obj/structure/AIcore/deactivated/ascent))
 			world << "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASCENTTTTT AIIIIIIIIIIIIIIIIIIIIIII"
-			character = character.AIize(FALSE, /mob/living/silicon/ai/ascent, /datum/ai_laws/ascent, "Ascent AI")
+			var/datum/ai_laws/ascent/lawset = new /datum/ai_laws/ascent
+			character = character.AIize(FALSE, /mob/living/silicon/ai/ascent, lawset, "Ascent AI")
 		else
 			character = character.AIize(FALSE)
 
